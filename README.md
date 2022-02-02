@@ -1,2 +1,2 @@
 # DSA
-Collection of LeetCode questions to ace the coding interview! - Created using [LeetHub](https://github.com/QasimWani/LeetHub)
+My Collection of DSA. Leetcode Profile: https://leetcode.com/rharshit82/
