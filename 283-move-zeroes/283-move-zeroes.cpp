@@ -1,14 +1,10 @@
 class Solution {
 public:
-    void moveZeroes(vector<int>& nums) {
-        int n= nums.size();
-        int high = n-1, low =0, mid =0;
-        while(mid<=high){
-            if(nums[mid]==0) mid++;
-            else{
-                swap(nums[mid],nums[low]);
-                mid++;
-                low++;
+     void moveZeroes(vector<int>& nums) {
+        for(int i = 0, index = 0; i < nums.size(); i++) {
+            if(nums[i]) {
+                swap(nums[i], nums[index]);
+                index++;
             }
         }
     }
