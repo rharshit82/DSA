@@ -11,10 +11,10 @@ public:
                 if(grid[i][j]==1) q.push({i,j});
             }
         }
+        if(q.size() == n*m)
+            return -1;
         int res=0;
         while(!q.empty()){
-            if(q.size() == n*m)
-            return -1;
             int size=q.size();
             res++;
             while(size--){
