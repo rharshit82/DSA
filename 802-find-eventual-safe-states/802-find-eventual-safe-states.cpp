@@ -1,33 +1,32 @@
-class Solution {
-public:
-    bool DFSRec(int s,vector<bool>&visited,vector<bool>&dfsVisited,vector<vector<int>>&graph,vector<bool>&present_cycle){
-        visited[s]=true;
-        dfsVisited[s]=true;
-        vector<int>data=graph[s];
-        for(auto x:data){
-            if(!visited[x]){
-                if(DFSRec(x,visited,dfsVisited,graph,present_cycle))
-                    return present_cycle[s]=true;
-            }
-            else if(visited[x]&&dfsVisited[x])
-                return present_cycle[s]=true;
-        }
-        dfsVisited[s]=false;
-        return false;
-    }
-    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-        int n=graph.size();
-        vector<bool> visited(n,false),dfsVisited(n,false);
-        vector<bool>present_cycle(n,false);
-        for(int i=0;i<n;i++){
-            if(!visited[i]){
-                DFSRec(i,visited,dfsVisited,graph,present_cycle);
-            }
-        }
-        vector<int> res;
-        for(int i=0;i<n;i++){
-            if(!present_cycle[i]) res.push_back(i);
-        }
-        return res;
-    }
-};
+ class Solution {
+ 	bool dfs(vector<vector<int>>& graph, int v, vector<int>& dp) {
+
+ 		if (dp[v])
+ 			return dp[v] == 1;
+
+ 		dp[v] = -1;
+
+ 		for (auto it = graph[v].begin(); it != graph[v].end(); it++)
+ 			if (!dfs(graph, *it, dp))
+ 				return false;
+
+ 		dp[v] = 1;
+
+ 		return true;
+ 	}
+ public:
+ 	vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+
+ 		int V = graph.size();
+
+ 		vector<int>res;
+ 		vector<int>dp(V, 0);
+
+ 		for (int i = 0; i < V; i++) {    
+ 			if (dfs(graph, i, dp))
+ 				res.push_back(i);
+ 		}
+
+ 		return res;
+ 	}
+ };
