@@ -19,12 +19,10 @@ public:
         }
         string str="";
         while(!st.empty()){
-            int freq = st.top().second;
-            char temp=st.top().first;
+            char temp =st.top().first;
             str+=temp;
             st.pop();
         }
-        
         reverse(str.begin(),str.end());
         return str;
     }
