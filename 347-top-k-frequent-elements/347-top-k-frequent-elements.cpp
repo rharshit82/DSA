@@ -4,9 +4,7 @@ public:
     //k and Smallest,Lowest,Closest -> maxHeap
     vector<int> topKFrequent(vector<int>& nums, int k) {
         unordered_map<int,int> mp;
-        for(auto ele: nums){
-            mp[ele]++;
-        }
+        for(auto ele: nums) mp[ele]++;
         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
         for(auto ele: mp){
             pq.push({ele.second,ele.first});
