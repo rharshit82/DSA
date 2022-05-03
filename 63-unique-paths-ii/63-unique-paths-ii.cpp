@@ -4,7 +4,7 @@ public:
     int dfs(vector<vector<int>>& grid, int i, int j ){
         int m=grid.size();
         int n=grid[0].size();
-        if(i>=m or j>=n or i<0 or j<0) return 0;
+        if(i>=m or j>=n) return 0;
         if(grid[i][j]==1) return 0;
         if(i==m-1 and j==n-1) return 1;
         if(dp[i][j]!=-1) return dp[i][j];
