@@ -4,10 +4,10 @@ public:
         int n=s.size();
         int res = 0;
         for(int i=0; i<n; i++){
-            unordered_map<int,int> mp;
+            set<int> mp;
             for(int j=i; j<n; j++){
                 if(mp.find(s[j])!=mp.end()) break;
-                else mp[s[j]]++;
+                else mp.insert(s[j]);
                 res=max(res,j-i+1);
             }
         }
