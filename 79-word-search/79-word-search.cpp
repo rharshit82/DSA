@@ -1,24 +1,27 @@
 class Solution {
 public:
-    bool dfs(vector<vector<char>>& board, int i, int j, string word, int k){
-        if(i>=board.size() or i<0 or j>=board[0].size() or j<0 or word[k]!=board[i][j]) return false;
-        if(k==word.size()-1) return true;
+    bool dfs(int i,int j, vector<vector<char>>& board,string &word,int n,int m, int k){
+        if(i>=n or j>=m or i<0 or j<0) return false;
+        if(k==word.size()-1 and word[k]==board[i][j])return true;
+        if(board[i][j]!=word[k]) return false;
         char temp = board[i][j];
         board[i][j]='*';
-        if(dfs(board,i+1,j,word,k+1) or dfs(board,i-1,j,word,k+1) or dfs(board,i,j+1,word,k+1) or dfs(board,i,j-1,word,k+1)){
-            return true;
-        }
+        bool res= dfs(i+1,j,board,word,n,m,k+1) or dfs(i,j+1,board,word,n,m,k+1)
+            or dfs(i-1,j,board,word,n,m,k+1) or dfs(i,j-1,board,word,n,m,k+1);
         board[i][j]=temp;
-        return false;
+        return res;
     }
     bool exist(vector<vector<char>>& board, string word) {
-        for(int i=0; i<board.size(); i++){
-            for(int j=0; j<board[0].size(); j++){
-                if(dfs(board,i,j,word,0))
-                    return true;
+        int n=board.size();
+        int m=board[0].size();
+        bool flag=false;
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(word[0]==board[i][j]){
+                    if(dfs(i,j,board,word,n,m,0)) flag=true;
+                }
             }
         }
-        
-        return false;
+        return flag;
     }
 };
