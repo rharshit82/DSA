@@ -11,11 +11,15 @@ public:
                 s+=path[i];
                 i++;
             }
-            
-            if(s==".") continue;
-            if(s==".."){
-                if(!st.empty()) st.pop();
-            } else st.push(s);
+            if(s == ".")
+                continue;
+            else if(s == "..")
+            {
+                if(!st.empty())
+                    st.pop();
+            }
+            else
+                st.push(s);
         }
         string res="";
         while(!st.empty()){
