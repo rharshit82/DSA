@@ -1,17 +1,17 @@
 class Solution {
 public:
     int kthFactor(int n, int k) {
-        int p=1;
         int res=1;
-        if(k==1) return 1;
-        for(int i=2; i<=n; i++){
-            if(n%i==0){
-                res=i;
-                p++;
+        for(int i=1; i<sqrt(n); i++){
+            if(n%i==0 and --k==0){
+                return i;
             }
-            if(p==k) break;
         }
-        if(p!=k) return -1;
-        return res;
+        for(int i=sqrt(n); i>=1; i--){
+            if(n%i==0 and --k==0){
+                return n/i;
+            }
+        }
+        return -1;
     }
 };
