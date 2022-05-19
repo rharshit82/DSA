@@ -12,13 +12,29 @@ public:
         if(!headA or !headB) return NULL;
         ListNode* tempA=headA;
         ListNode* tempB=headB;
-        while(tempA and tempB and tempA!=tempB and tempA!=tempB){
-            tempA=tempA->next;
-            tempB=tempB->next;
-            if(tempA==tempB) return tempA;
-            if(!tempA) tempA=headB;
-            if(!tempB) tempB=headA;
+        int l1=0,l2=0;
+        while(tempA or tempB){
+            if(tempA){
+                tempA=tempA->next;
+                l1++;
+            }
+            if(tempB){
+               tempB=tempB->next;
+                l2++; 
+            }
+            
         }
-        return tempA;
+        
+        int diff=l1-l2;
+        if(diff>0)
+            while(diff-- !=0) headA=headA->next;
+        else
+            while(diff++ !=0) headB=headB->next;
+        while(headA){
+            if(headA==headB) return headA;
+            headA=headA->next;
+            headB=headB->next;
+        }
+        return headA;
     }
 };
