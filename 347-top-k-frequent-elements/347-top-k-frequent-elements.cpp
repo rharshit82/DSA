@@ -1,13 +1,14 @@
 class Solution {
 public:
-    //k and Top,Greater,Largest -> minHeap
-    //k and Smallest,Lowest,Closest -> maxHeap
     vector<int> topKFrequent(vector<int>& nums, int k) {
         unordered_map<int,int> mp;
-        for(auto ele: nums) mp[ele]++;
+        int n=nums.size();
+        for(int i=0; i<n; i++){
+            mp[nums[i]]++;
+        }
         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
-        for(auto ele: mp){
-            pq.push({ele.second,ele.first});
+        for(auto it: mp){
+            pq.push({it.second,it.first});
             if(pq.size()>k) pq.pop();
         }
         vector<int> res;
