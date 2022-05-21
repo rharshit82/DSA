@@ -27,7 +27,6 @@ public:
         }
         if(fast) slow=slow->next;
         while(p and slow){
-            cout<<p->val<<" "<<slow->val<<endl;
             if(slow->val!=p->val) return false;
             slow=slow->next;
             p=p->next;
