@@ -1,38 +1,29 @@
 class MyStack {
 public:
-    //2 Queues
-    // Push
-    //     Add x -> Q2
-    //     Q1 -> Q2 (elemnt by elemnt)
-    //     Swap(Q1,Q2)
-    // Pop
-    //     Remove the Top of Q1
-    // Top
-    //     Top of Q1
-    queue<int> q1;
-    queue<int> q2;
     MyStack() {
         
     }
-    
+    queue<int> q1,q2;
     void push(int x) {
-        q2.push(x);
         while(!q1.empty()){
             q2.push(q1.front());
             q1.pop();
         }
-        swap(q1,q2);
+        q1.push(x);
+        while(!q2.empty()){
+            q1.push(q2.front());
+            q2.pop();
+        }
     }
-    
+        
     int pop() {
-        int res = top();
-        if(!q1.empty()) q1.pop();
+        int res = q1.front();
+        q1.pop();
         return res;
     }
     
     int top() {
-        if(!q1.empty()) return q1.front();
-        return -1;
+        return q1.front();
     }
     
     bool empty() {
