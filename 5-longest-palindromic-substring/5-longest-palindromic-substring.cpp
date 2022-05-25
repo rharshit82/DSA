@@ -27,7 +27,6 @@ public:
                 }
             }
         }
-        cout<<start<<" "<<maxLen<<endl;
         string res="";
         for(int i=start; i<start+maxLen; i++){
             res+=s[i];
