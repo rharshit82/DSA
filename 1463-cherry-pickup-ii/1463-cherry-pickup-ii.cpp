@@ -1,8 +1,9 @@
 class Solution {
 public:
-    int maxChocoUtil(int i, int j1, int j2, int n, int m, vector < vector < int >> 
-& grid, vector < vector < vector < int >>> & dp) {
-  if (j1 < 0 || j1 >= m || j2 < 0 || j2 >= m)
+    int solve(vector<vector<vector<int>>>&dp, int i, int j1, int j2,vector<vector<int>>& grid){
+        int n=grid.size();
+        int m=grid[0].size();
+        if (j1 < 0 || j1 >= m || j2 < 0 || j2 >= m)
     return -1e9;
 
   if (i == n - 1) {
@@ -20,21 +21,18 @@ public:
     for (int dj = -1; dj <= 1; dj++) {
       int ans;
       if (j1 == j2)
-        ans = grid[i][j1] + maxChocoUtil(i + 1, j1 + di, j2 + dj, n, m, grid, dp);
+        ans = grid[i][j1] + solve(dp, i + 1, j1 + di, j2 + dj,  grid );
       else
-        ans = grid[i][j1] + grid[i][j2] + maxChocoUtil(i + 1, j1 + di, j2 + dj, n,
-        m, grid, dp);
+        ans = grid[i][j1] + grid[i][j2] + solve(dp, i + 1, j1 + di, j2 + dj, grid );
       maxi = max(maxi, ans);
     }
   }
   return dp[i][j1][j2] = maxi;
-}
+    }
     int cherryPickup(vector<vector<int>>& grid) {
         int n=grid.size();
         int m=grid[0].size();
-        vector < vector < vector < int >>> dp(n, vector < vector < int >> (m, vector < int
-  > (m, -1)));
-
-  return maxChocoUtil(0, 0, m - 1, n, m, grid, dp);
+        vector<vector<vector<int>>> dp(n,vector<vector<int>>(m,vector<int>(m,-1)));
+        return solve(dp,0,0,m-1,grid);
     }
 };
