@@ -4,7 +4,7 @@ public:
         int n=coins.size();
         
         vector<int> dp(amount+1,1e8);
-        for(int i=0; i<=amount; i++) dp[0]=0;
+        dp[0]=0;
         for(int i=1; i<=amount; i++){
             int mn = 1e8;
             for(int j=1; j<=n; j++){
