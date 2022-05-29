@@ -1,21 +1,17 @@
 class Solution {
 public:
+    int f(vector<int>& nums,vector<vector<int>>& dp,int ind, int prev){
+        if(ind==nums.size()) return 0;
+        if(dp[ind][prev+1]!=-1) return dp[ind][prev+1];
+        int len = f(nums,dp,ind+1,prev);
+        if(prev==-1 or nums[ind]>nums[prev]){
+            len=max(1+ f(nums,dp,ind+1,ind), len) ;
+        }
+        return dp[ind][prev+1]=len;
+    }
     int lengthOfLIS(vector<int>& nums) {
         int n=nums.size();
-        if(n==1) return 1;
-        int res=INT_MIN;
-        vector<int> dp(n,0);
-        dp[0]=1;
-        for(int i=1 ;i<n; i++){
-            int mx=0;
-            for(int j=0; j<i; j++){
-                if(nums[j]<nums[i]){
-                    mx = max(mx, dp[j]);
-                }
-            }
-            dp[i]=mx+1;
-            res=max(dp[i],res);
-        }
-        return res;
+        vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
+        return f(nums,dp,0,-1);
     }
 };
