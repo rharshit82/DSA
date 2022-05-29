@@ -5,11 +5,11 @@ public:
         int curreach=0;
         int maxreach=0;
         int jump=0;
-        for(int i=0;i<nums.size();i++){
+        for(int i=0;i<nums.size()-1;i++){
             if(i+nums[i]>maxreach){
                 maxreach=i+nums[i];
             }
-            if(curreach==i and i!=nums.size()-1){
+            if(curreach==i){
                 jump++;
                 curreach=maxreach;
             }
