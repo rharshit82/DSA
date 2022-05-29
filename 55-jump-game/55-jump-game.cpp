@@ -7,7 +7,8 @@ public:
             if(i>reachind){
                 return false;
             }
-            reachind=max(reachind,i+nums[i]);
+            if(i!=nums.size())
+                reachind=max(reachind,i+nums[i]);
         }
         if(i!=nums.size())
             return false;
