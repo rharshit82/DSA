@@ -1,20 +1,19 @@
+
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        int n=nums.size();
-        if(n<=1) return 0;
-        int ladder=nums[0];
-        int stairs=nums[0];
-        int jumps=1;
-        for(int i=1; i<n; i++){
-            if(i==n-1) return jumps;
-            stairs--;
-            ladder=max(ladder, i+ nums[i]);
-            if(stairs==0){
-                stairs=ladder-i;
-                jumps++;
+        int curreach=0;
+        int maxreach=0;
+        int jump=0;
+        for(int i=0;i<nums.size();i++){
+            if(i+nums[i]>maxreach){
+                maxreach=i+nums[i];
+            }
+            if(curreach==i and i!=nums.size()-1){
+                jump++;
+                curreach=maxreach;
             }
         }
-        return jumps;
+        return jump;
     }
 };
