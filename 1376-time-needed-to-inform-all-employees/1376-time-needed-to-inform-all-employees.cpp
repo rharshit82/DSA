@@ -1,19 +1,19 @@
 class Solution {
 public:
-    
-    int numOfMinutes(int n, int headId, vector<int>& manager, vector<int>& informTime) {
-        unordered_map<int,vector<int>> adj;
-        for(int i=0;i<(int)manager.size();i++){
+    int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
+        map<int, vector<int>> mp;
+        for(int i=0; i<n; i++){
             if(manager[i]!=-1)
-                adj[manager[i]].push_back(i);
+                mp[manager[i]].push_back(i);
         }
-        return dfs(headId,informTime,adj);
+        return dfs(informTime,headID, mp);
     }
-    int dfs(int headId, vector<int>&informTime,unordered_map<int,vector<int>> &adj){
+    int dfs(vector<int>& informTime, int headID, map<int, vector<int>> &mp){
+        if(mp[headID].size()==0) return 0;
         int mx=0;
-        for(auto i: adj[headId]){
-            mx=max(mx,dfs(i,informTime,adj));
+        for(auto i: mp[headID]){
+            mx=max(mx, dfs(informTime, i, mp ));
         }
-        return informTime[headId]+mx;
+        return informTime[headID] + mx;
     }
 };
