@@ -1,28 +1,30 @@
 class Solution {
 public:
-    vector<vector<int> > threeSum(vector<int> &num) {
-    vector<vector<int> > res;
-    sort(num.begin(), num.end());
-    for (int i = 0; i < num.size(); i++) {
-        int target = -num[i];
-        int front = i + 1;
-        int back = num.size() - 1;
-        while (front < back) {
-            int sum = num[front] + num[back];
-            if (sum < target)
-                front++;
-            else if (sum > target)
-                back--;
-            else {
-                vector<int> triplet = {num[i], num[front], num[back]};
-                res.push_back(triplet);
-                while (front < back && num[front] == triplet[1]) front++;
-                while (front < back && num[back] == triplet[2]) back--;
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        int n=nums.size();
+        vector<vector<int>> res;
+        sort(nums.begin(),nums.end());
+        for(int i=0; i<n; i++){
+            int target=-nums[i];
+            int left=i+1;
+            int right=n-1;
+            while(left<right){
+                int sum = nums[left] + nums[right];
+                if(sum<target){
+                    left++;
+                } else if(sum>target){
+                    right--;
+                } else{
+                    res.push_back({nums[i],nums[left],nums[right]});
+                    int j=left;
+                    int k=right;
+                    while(left<right and nums[j]==nums[left]) left++;
+                    while(right>left and nums[k]==nums[right]) right--;
+                }
             }
+            while(i+1<n and nums[i+1]==nums[i]) i++;
         }
-        while (i + 1 < num.size() && num[i + 1] == num[i]) 
-            i++;
+        return res;
+        
     }
-    return res;
-}
 };
