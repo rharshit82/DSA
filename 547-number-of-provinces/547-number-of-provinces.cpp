@@ -1,28 +1,27 @@
 class Solution {
 public:
-    vector<int> parent;
-    int find(int x){
-        return parent[x]==x?x: find(parent[x]);
+    int find(int x,vector<int>&parents){
+        return parents[x]==x? x: find(parents[x],parents);
     }
-    int findCircleNum(vector<vector<int>>& isConnected) {
-        int n=isConnected.size();
-        if(!n) return 0;
-        parent.resize(n,0);
-        int res=n;
-        for(int i=0;i<n;i++)
-            parent[i]=i;
-        for(int i=0;i<n;i++){
-            for(int j=i+1;j<n;j++){
-                if(isConnected[i][j]){
-                int x=find(i);
-                int y=find(j);
-                if(x!=y){
-                    parent[x]=y;
-                    res--;
-                }
+    int findCircleNum(vector<vector<int>>& arr) {
+        int n=arr.size();
+        vector<int> parents(n);
+        for(int i=0; i<n; i++) parents[i]=i;
+        for(int i=0; i<arr.size(); i++){
+            for(int j=i+1; j<arr[0].size(); j++){
+                if(arr[i][j]==1){
+                    int x = find(i,parents);
+                    int y = find(j,parents);
+                    if(x!=y){
+                        parents[x]=y;
+                    }
                 }
             }
         }
-        return res;
+        int res=0;
+        for(int i=0; i<n; i++){
+            if(parents[i]!=i) res++;
+        }
+        return n-res;
     }
 };
