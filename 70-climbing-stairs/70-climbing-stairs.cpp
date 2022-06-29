@@ -1,14 +1,13 @@
 class Solution {
 public:
-    
-    int count(int n){
-        if(n==1 or n==0) return 1;
-        if(dp[n]!=-1) return dp[n];
-        return dp[n]=count(n-1) + count(n-2);
+    int solve(int i, int n, vector<int>&dp){
+        if(i==n or i==n-1) return 1;
+        if(dp[i]!=-1) return dp[i];
+        return dp[i]=solve(i+1,n,dp) + solve(i+2,n,dp);
+        
     }
-    int dp[100000];
     int climbStairs(int n) {
-        memset(dp,-1,sizeof(dp));
-        return count(n);
+        vector<int>dp(n+1,-1);
+        return solve(0,n,dp);
     }
 };
