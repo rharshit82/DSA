@@ -2,13 +2,24 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         int n=s.size();
-        int res = 0;
-        for(int i=0; i<n; i++){
-            set<int> mp;
-            for(int j=i; j<n; j++){
-                if(mp.find(s[j])!=mp.end()) break;
-                else mp.insert(s[j]);
-                res=max(res,j-i+1);
+        int j=0;
+        int i=0;
+        set<char>st;
+        int res=0;
+        while(j<n){
+            // cout<<j<<" "<<i<<endl;
+            if(st.find(s[j])==st.end()){
+                st.insert(s[j]);
+                res=max(res, j-i+1);
+                j++;
+            } else{
+                while(st.find(s[j])!=st.end() and i<n){
+                    st.erase(s[i]);
+                    i++;
+                }
+                st.insert(s[j]);
+                res=max(res, j-i+1);
+                j++;
             }
         }
         return res;
