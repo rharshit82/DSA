@@ -1,25 +1,22 @@
 class Solution {
 public:
-    //Just know maximum height diff and maximum width diff after sorting. multiply them
-    int maxArea(int h, int w, vector<int>& hCuts, vector<int>& vCuts) {
-        int hS= hCuts.size();
-        int vS= vCuts.size();
-        sort(hCuts.begin(),hCuts.end());
-        sort(vCuts.begin(),vCuts.end());
-        int hDiff = max(hCuts[0]-0,h-hCuts[hS-1]);
-        int vDiff = max(vCuts[0]-0,w-vCuts[vS-1]);
-
-        if(hS>1){
-            for(int i=1; i<hS; i++){
-                hDiff = max(hDiff, hCuts[i]-hCuts[i-1]);
+    int maxArea(int h, int w, vector<int>& H, vector<int>& V) {
+        sort(H.begin(),H.end());
+        sort(V.begin(),V.end());
+        int hdiff = max(H[0],h-H.back());
+        int vdiff = max(V[0],w-V.back());
+        if(h>1){
+            for(int i=1; i<H.size(); i++){
+            hdiff = max(hdiff, H[i]-H[i-1]);
+        }
+        }
+        
+        if(w>1){
+            for(int i=1; i<V.size(); i++){
+            vdiff = max(vdiff, V[i]-V[i-1]);
             }
         }
-        if(vS>1){
-            for(int i=1; i<vS; i++){
-                vDiff = max(vDiff, vCuts[i]-vCuts[i-1]);
-            }
-        }
-        long ans = 1L* hDiff * vDiff;
-        return (int) (ans%1000000007);
+        
+        return (1LL * vdiff * hdiff)%1000000007;
     }
 };
