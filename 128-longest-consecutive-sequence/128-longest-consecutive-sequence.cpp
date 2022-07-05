@@ -1,6 +1,7 @@
 class Solution {
 public:
     int longestConsecutive(vector<int>& arr) {
+        ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
         int n = arr.size(); // extract the size of array
         if(n == 0) return 0; // if length of array is zero, then from here simply return 0
         
