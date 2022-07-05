@@ -1,28 +1,35 @@
 class Solution {
 public:
-    int longestConsecutive(vector<int>& arr) {
-        ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-        int n = arr.size(); // extract the size of array
-        if(n == 0) return 0; // if length of array is zero, then from here simply return 0
-        
-        sort(arr.begin(), arr.end()); // sort the array
-        
-        int mxLen = 0, currLen = 1; // put mxLen = 0, and currLen as 1
-        
-        for(int i = 1; i < n; i++) // traverse from the array
-        {
-            if(arr[i] == arr[i - 1] + 1) // this is the part of consecutive sequence
-            {
-                currLen++; // increase the curr Length by 1
-            }
-            else if(arr[i] != arr[i - 1]) // but if it is not equal
-            {
-                mxLen = max(mxLen, currLen); // update our mxLen 
-                currLen = 1; // and reset the currLen with 1
+    int bsearch(vector<int>& nums, int x){
+        int low = 0, high =nums.size()-1;
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            if(nums[mid]==x) return mid;
+            if(nums[mid]>x){
+                high=mid-1;
+            } else{
+                low = mid+1;
             }
         }
-        
-        mxLen = max(mxLen, currLen); // update our mxLen 
-        return mxLen; // Finally return mxLen
+        return -1;
+    }
+    int longestConsecutive(vector<int>& nums) {
+        ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        int res=0;
+        int cur=1;
+        int last=INT_MIN;
+        for(int i=0; i<n; i++){
+            if(nums[i]==last) continue;
+            if(bsearch(nums,nums[i]+1)!=-1){
+                cur++;
+            } else{
+                cur=1;
+            }
+            last = nums[i];
+            res = max(res, cur);
+        }
+        return res;
     }
 };
