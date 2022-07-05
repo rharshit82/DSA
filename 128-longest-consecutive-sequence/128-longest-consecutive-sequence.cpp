@@ -9,7 +9,7 @@ public:
         int res=0;
         int cur=1;
         for(auto ele: st){
-            if(st.find(ele-1)!=st.end()){
+            if(st.find(ele+1)!=st.end()){
                 cur++;
             } else{
                 cur=1;
