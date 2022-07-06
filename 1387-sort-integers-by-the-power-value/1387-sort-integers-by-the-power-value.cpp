@@ -2,11 +2,11 @@ class Solution {
 public:
     int solve(int x, vector<int>&dp){
         if(x<=1) return 0;
-        // if(dp[x]!=-1) return dp[x];
+        if(dp[x]!=-1) return dp[x];
         if(x%2==0){
-            return 1 + solve(x/2,dp);
+            return dp[x]=1 + solve(x/2,dp);
         } else{
-            return 1+ solve(3*x+1,dp);
+            return dp[x]=1+ solve(3*x+1,dp);
         }
         return 0;
     }
@@ -18,7 +18,7 @@ public:
     }
     int getKth(int lo, int hi, int k) {
         vector<pair<int,int>> arr(hi-lo+1);
-        vector<int> dp(hi+1,-1);
+        vector<int> dp(1000000,-1);
         int var=0;
         for(int i=lo; i<=hi; i++){
             arr[var++] = {i,solve(i,dp)};
