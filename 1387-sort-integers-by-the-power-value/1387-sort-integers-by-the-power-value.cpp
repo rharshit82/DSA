@@ -17,6 +17,7 @@ public:
         return a.second<b.second;
     }
     int getKth(int lo, int hi, int k) {
+        ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
         vector<pair<int,int>> arr(hi-lo+1);
         vector<int> dp(1000000,-1);
         int var=0;
