@@ -15,7 +15,9 @@ public:
         int m=board[0].size();
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
-                if(dfs(i,j,0,word,board)) return true;
+                if(word[0]==board[i][j]){
+                    if(dfs(i,j,0,word,board)) return true;
+                }
             }
         }
         return false;
