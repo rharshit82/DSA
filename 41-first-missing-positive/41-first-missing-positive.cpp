@@ -8,7 +8,7 @@ public:
             }
         }
         for(int i=1; i<=n; i++){
-            if((nums[i-1]!=i)) return i;
+            if(nums[i-1]!=i) return i;
         }
         return n+1;
     }
