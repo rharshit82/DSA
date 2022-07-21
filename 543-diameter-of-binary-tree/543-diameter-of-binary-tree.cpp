@@ -11,16 +11,17 @@
  */
 class Solution {
 public:
-    int depth(TreeNode* root, int &d){
+    int findRes(TreeNode* root, int &d){
         if(!root) return 0;
-        int left = depth(root->left,d);
-        int right= depth(root->right,d);
-        d= max(d,left+right);
-        return 1+ max(left,right);
+        int left = findRes(root->left,d);
+        int right = findRes(root->right,d);
+        d = max(d, left+right);
+        return 1 + max(left,right);
     }
+    
     int diameterOfBinaryTree(TreeNode* root) {
-        int d=0;
-        depth(root,d);
+        int d =0;
+        findRes(root,d);
         return d;
     }
 };
