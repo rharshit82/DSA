@@ -11,21 +11,14 @@
  */
 class Solution {
 public:
-    void rangeSum(TreeNode* root, int low, int high, int &res){
-        if(!root) return;
-        if(root->val>=low and root->val<=high){
-            res+=root->val;
-            rangeSum(root->left,low,high,res);
-            rangeSum(root->right,low,high,res);
-        } else if(root->val>=low){
-            rangeSum(root->left,low,high,res);
-        } else if(root->val<=high){
-            rangeSum(root->right,low,high,res);
-        }
-    }
+    int sum=0;
     int rangeSumBST(TreeNode* root, int low, int high) {
-        int res=0;
-        rangeSum(root,low,high,res);
-        return res;
+        if(!root) return 0;
+        rangeSumBST(root->left,low,high);
+        if(root->val>=low and root->val<=high){
+            sum+=root->val;
+        }
+        rangeSumBST(root->right,low,high);
+        return sum;
     }
 };
