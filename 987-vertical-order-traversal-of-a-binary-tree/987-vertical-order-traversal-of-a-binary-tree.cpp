@@ -29,14 +29,14 @@ public:
             }
         }
         vector<vector<int>> res;
-        for(auto it: mp){
-            vector<int> temp;
-            for(auto x: it.second){
-                for(auto ele: x.second){
-                    temp.push_back(ele);
+        for(auto p: mp){
+            vector<int> col;
+            for(auto q: p.second){
+                for(auto ele: q.second){
+                    col.push_back(ele);
                 }
             }
-            res.push_back(temp);
+            res.push_back(col);
         }
         return res;
     }
