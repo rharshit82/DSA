@@ -13,10 +13,8 @@ public:
         if(!root or root==p or root==q) return root;
         TreeNode* left = lowestCommonAncestor(root->left,p,q);
         TreeNode* right = lowestCommonAncestor(root->right,p,q);
-        if(left and right and left->val == p->val and right->val == q->val) return root;
-        if(left and right and left->val == q->val and right->val == p->val) return root;
-        if(left) return left;
-        if(right) return right;
-        return NULL;
+        if(!left) return right;
+        if(!right) return left;
+        return root;
     }
 };
