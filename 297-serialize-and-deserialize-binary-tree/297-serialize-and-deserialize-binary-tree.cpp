@@ -40,17 +40,13 @@ public:
         while(!q.empty()){
             TreeNode* curr = q.front(); q.pop();
             getline(s,str,',');
-            if(str=="#"){
-                
-            } else{
+            if(str!="#"){
                 curr->left = new TreeNode(stoi(str));
                 q.push(curr->left);
             }
             
             getline(s,str,',');
-            if(str=="#"){
-                // curr->right  = NULL;
-            } else{
+            if(str!="#"){
                 curr->right = new TreeNode(stoi(str));
                 q.push(curr->right);
             }
