@@ -11,9 +11,9 @@
  */
 class Solution {
 public:
-    TreeNode *first=NULL;
-    TreeNode *second=NULL;
-    TreeNode* prev= new TreeNode(INT_MIN);
+    TreeNode* first = NULL;
+    TreeNode* second = NULL;
+    TreeNode* prev = new TreeNode(INT_MIN);
     void recoverTree(TreeNode* root) {
         traverse(root);
         swap(first->val,second->val);
@@ -21,13 +21,13 @@ public:
     void traverse(TreeNode* root){
         if(!root) return;
         traverse(root->left);
-        if(first==NULL && prev->val>root->val){
-            first=prev;
+        if(!first and root->val < prev->val){
+            first = prev;
         }
-        if(first!=NULL && prev->val>root->val){
-            second=root;
+        if(first and root->val < prev->val){
+            second = root;
         }
-        prev=root;
+        prev = root;
         traverse(root->right);
     }
 };
