@@ -50,7 +50,6 @@ public:
         int i= l.next();
         int j = r.next();
         while(i<j){
-            cout<<i<<" "<<j<<endl;
             if(i+j == k) return true;
             else if(i+j<k){
                 i = l.next();
