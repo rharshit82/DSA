@@ -18,18 +18,17 @@ public:
             fast = fast->next->next;
             slow = slow->next;
         }
-        
+        ListNode* mid = slow;
         ListNode* p = head;
         ListNode* q = head;
         ListNode* r = head;
-        while(q!=slow){
+        while(q!=mid){
             r = q->next;
             q->next = p;
             p = q;
             q = r;
         }
         ListNode* start = p;
-        ListNode* mid = slow;
         int res=0;
         while(start and mid){
             res = max(res, start->val + mid->val);
