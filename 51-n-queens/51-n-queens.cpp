@@ -1,40 +1,38 @@
 class Solution {
 public:
-    bool isSafe(int row, int col, vector<string>&board, int n){
-        for(int i=col-1; i>=0; i--){
-            if(board[row][i]=='Q') return false;
+    bool isSafe(vector<string>&board,int row, int col){
+        int n=board.size();
+        for(int i=0; i<=col-1; i++){
+            if(board[row][i] == 'Q') return false;
         }
-        for(int i=row-1,j=col-1; i>=0 and j>=0; i--,j--){
-            if(board[i][j]=='Q') return false;
+        for(int i=row-1, j= col-1; i>=0 and j>=0; i--, j--){
+            if(board[i][j] == 'Q') return false;
         }
-        for(int i=row+1,j=col-1; i<n and j>=0; i++,j--){
-            if(board[i][j]=='Q') return false;
+         for(int i=row+1, j = col-1; i<n and j>=0; i++, j--){
+            if(board[i][j] == 'Q') return false;
         }
         return true;
+        
     }
-    
-    void backtrack(int col, vector<string>&board, vector<vector<string>>&res, int n){
-        if(col==n) {
+    void backtrack(vector<string>&board, vector<vector<string>>&res, int col){
+        int n=board.size();
+        if(col==n){
             res.push_back(board);
-            return;
         }
-        for(int row=0; row<n; row++){
-            if(isSafe(row,col,board,n)){
-                board[row][col]='Q';
-                backtrack(col+1,board,res,n);
-                board[row][col]='.';
+        for(int row = 0; row<n; row++){
+            if(isSafe(board,row,col)){
+                board[row][col] = 'Q';
+                backtrack(board,res,col+1);
+                board[row][col] = '.';
             }
         }
     }
-    
     vector<vector<string>> solveNQueens(int n) {
         vector<vector<string>> res;
+        string s(n, '.');
         vector<string> board;
-        string s(n,'.');
-        for(int i=0; i<n; i++){
-            board.push_back(s);
-        }
-        backtrack(0,board,res,n);
+        for(int i=0; i<n; i++) board.push_back(s);
+        backtrack(board,res,0);
         return res;
     }
 };
