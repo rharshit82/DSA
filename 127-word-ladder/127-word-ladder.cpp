@@ -1,31 +1,30 @@
 class Solution {
 public:
+
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-        unordered_set<string> dict(wordList.begin(), wordList.end());
-        queue<string> todo;
-        todo.push(beginWord);
-        int ladder = 1;
-        while (!todo.empty()) {
-            int n = todo.size();
-            for (int i = 0; i < n; i++) {
-                string word = todo.front();
-                todo.pop();
-                if (word == endWord) {
-                    return ladder;
-                }
-                dict.erase(word);
-                for (int j = 0; j < word.size(); j++) {
-                    char c = word[j];
-                    for (int k = 0; k < 26; k++) {
-                        word[j] = 'a' + k;
-                        if (dict.find(word) != dict.end()) {
-                            todo.push(word);
+        unordered_set<string> st(wordList.begin(),wordList.end());
+        if(st.find(endWord)==st.end()) return 0;
+        int depth = 0;
+        queue<string> q;
+        q.push(beginWord);
+        while(!q.empty()){
+            int sz = q.size();
+            depth++;
+            for(int k=0; k<sz; k++){
+                string curr = q.front(); q.pop();
+                for(int i=0; i<curr.size(); i++){
+                    string temp = curr;
+                    for(char ch='a'; ch<='z'; ch++){
+                        temp[i] = ch;
+                        if(temp.compare(curr)==0) continue;
+                        if(temp.compare(endWord)==0) return depth+1;
+                        if(st.find(temp)!=st.end()){
+                            st.erase(temp);
+                            q.push(temp);
                         }
-                     }
-                    word[j] = c;
+                    }
                 }
             }
-            ladder++;
         }
         return 0;
     }
