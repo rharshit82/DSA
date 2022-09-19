@@ -23,7 +23,6 @@ public:
             vector<int> temp;
             for(int i=0; i<sz; i++){
                 TreeNode* curr = q.front(); q.pop();
-                cout<<"helo";
                 if(level%2)
                     curr->val = values[sz-i-1];
                 
