@@ -33,13 +33,10 @@ class Solution {
             double y2 = y + sz;
 
             if (y2 <= cutY) {
-                // Fully below
                 below += sz * sz;
             } else if (y < cutY) {
-                // Partially below
                 below += (cutY - y) * sz;
             }
-            // else: fully above → contributes nothing
         }
         return below;
     }
