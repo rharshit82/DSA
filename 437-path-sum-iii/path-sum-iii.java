@@ -15,21 +15,24 @@
  */
 class Solution {
     public int pathSum(TreeNode root, int targetSum) {
-        return pathSum(root, (long) targetSum);
+        HashMap<Long, Integer> mp = new HashMap<>();
+        mp.put(0L, 1);
+        return traverse(root, targetSum, mp, 0);
     }
-
-    public int pathSum(TreeNode root, long targetSum) {
+    int traverse(TreeNode root, int targetSum, HashMap<Long, Integer> mp, long currSum){
         if(root == null) return 0;
+         currSum += root.val;
+        int res= 0;
+        res+= mp.getOrDefault(currSum - targetSum, 0);
+        
+        mp.put(currSum, mp.getOrDefault(currSum, 0) + 1);
 
-        return pathSum(root.left, targetSum ) + pathSum(root.right, targetSum ) + countWaysFrom(root, targetSum);
-    }
+        res+= traverse(root.left, targetSum, mp, currSum);
+        res+= traverse(root.right, targetSum, mp, currSum);
 
-    int countWaysFrom(TreeNode root, long targetSum){
-        if(root == null) return 0;
-        int res = 0;
-        if(root.val == targetSum) res++;
+        mp.put(currSum, mp.get(currSum) - 1);
+        return res;
 
-        return res + countWaysFrom(root.left, targetSum-root.val) + countWaysFrom(root.right, targetSum-root.val);
     }
 
 }
