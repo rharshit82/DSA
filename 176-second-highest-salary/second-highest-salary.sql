@@ -1,0 +1,1 @@
+SELECT (SELECT TOP 1 salary from Employee where salary < (SELECT MAX(salary) from Employee) ORDER BY salary DESC) as SecondHighestSalary;
