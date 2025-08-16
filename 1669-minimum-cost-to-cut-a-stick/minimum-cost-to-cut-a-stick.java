@@ -1,26 +1,26 @@
 class Solution {
     public int minCost(int n, int[] cuts) {
-        int m = cuts.length;
+        int[] cutsPadded = new int[cuts.length + 2];
+        cutsPadded[0] = 0;
         Arrays.sort(cuts);
-        
-        int[] allCuts = new int[m + 2];
-        allCuts[0] = 0;
-        allCuts[m + 1] = n;
-        for (int i = 0; i < m; i++) {
-            allCuts[i + 1] = cuts[i];
+        for (int i = 0; i < cuts.length; i++) {
+            cutsPadded[i + 1] = cuts[i];
         }
-        int[][] dp = new int[m + 2][m + 2];
-        int res = Integer.MAX_VALUE;
-        for(int i = m; i>=1; i--){
-            for(int j = i; j <= m; j++) {
-                if(i > j) continue;
-                dp[i][j] = Integer.MAX_VALUE;
-                for(int k = i; k<=j; k++){
-                    dp[i][j] = Math.min(dp[i][j], allCuts[j + 1] - allCuts[i - 1] + dp[k+1][j] + dp[i][k-1]);
+        cutsPadded[cuts.length + 1] = n;
+        int[][] dp = new int[cuts.length + 2][cuts.length + 2];
+
+        for (int len = 1; len <= cutsPadded.length; len++) {
+            for (int l = 0; l + len <= cutsPadded.length; l++) {
+                int r = l + len - 1;
+                dp[l][r] = Integer.MAX_VALUE;
+                for (int k = l + 1; k < r; k++) {
+                    dp[l][r] = Math.min(dp[l][r],
+                            dp[l][k] + dp[k][r] + cutsPadded[r] - cutsPadded[l]);
                 }
-                
+                if (dp[l][r] == Integer.MAX_VALUE) dp[l][r] = 0;
+
             }
         }
-        return dp[1][m];
+        return dp[0][cuts.length + 1];
     }
 }
